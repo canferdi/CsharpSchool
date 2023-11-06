@@ -61,7 +61,7 @@ namespace DataProject1._4
 
         public void MinMaxDistance()
         {
-            int minDist = 2147483647; int maxDist = -2147483648;
+            int minDist = int.MaxValue; int maxDist = int.MinValue;
             string maxCty1 = "", maxCty2 = "", minCty1 = "", minCty2 = "";
 
             for (int row = 0; row < 81; row++)
@@ -110,7 +110,7 @@ namespace DataProject1._4
         public int[] NearestCityFinder(string cityName, int distance, int[][]copiedDistanceArr)
         {
             int row, col;
-            int minDist = 2147483647;
+            int minDist = int.MaxValue;
             Boolean isReverse = false;
 
             for (row = 0; row < 81; row++)  // Seçilen ilin satırını row değişkenine atar
