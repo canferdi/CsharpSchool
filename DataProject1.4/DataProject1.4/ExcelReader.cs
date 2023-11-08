@@ -6,7 +6,7 @@ namespace DataProject1._4
 {
     internal class ExcelReader
     {
-        public int[][] ReadExcelDistance(string filePath)
+        public int[][] ReadExcelDistance(string filePath, int[][] distanceArr)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -14,16 +14,13 @@ namespace DataProject1._4
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // İlk çalışma sayfasını seç
 
-                // Jagged array oluştur
-                int[][] distanceArr = new int[81][];
-
                 // Excel tablosundan veri oku ve arraye yerleştir
                 for (int row = 0; row < 81; row++)
                 {
-                    distanceArr[row] = new int[row+1];
+                    distanceArr[row] = new int[row + 1];
                     for (int col = 0; col <= row; col++)
                     {
-                        if (int.TryParse(worksheet.Cells[row+3, col+3].Value?.ToString(), out int value))
+                        if (int.TryParse(worksheet.Cells[row + 3, col + 3].Value?.ToString(), out int value))
                         {
                             distanceArr[row][col] = value;
                         }
@@ -35,6 +32,34 @@ namespace DataProject1._4
                     }
                 }
                 return distanceArr;
+            }
+        }
+
+        public int[,] ReadExcelDistance(string filePath, int[,] distanceMtrx)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // İlk çalışma sayfasını seç
+
+                // Excel tablosundan veri oku ve arraye yerleştir
+                for (int row = 0; row < 81; row++)
+                {
+                    for (int col = 0; col <= row; col++)
+                    {
+                        if (int.TryParse(worksheet.Cells[row + 3, col + 3].Value?.ToString(), out int value))
+                        {
+                            distanceMtrx[row,col] = value;
+                        }
+                        else
+                        {
+                            // Hata durumunda yapılacak işlemi belirleyin row==col olma durumu
+                            distanceMtrx[row,col] = 0;
+                        }
+                    }
+                }
+                return distanceMtrx;
             }
         }
 

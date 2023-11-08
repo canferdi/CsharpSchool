@@ -11,13 +11,15 @@ namespace DataProject1._4
         static void Main(string[] args)
         {
             ExcelReader xlReader = new ExcelReader();
-
+            int[][] distanceArr = new int[81][];
+            int[,] distanceMtrx = new int[81,81];
             string path = @"C:\Users\fcan5\OneDrive\Belgeler\DataLab\ilmesafe.xlsx";
-            int[][] distanceArr = xlReader.ReadExcelDistance(path);
+            distanceArr = xlReader.ReadExcelDistance(path,distanceArr);
+            distanceMtrx = xlReader.ReadExcelDistance(path, distanceMtrx);
             string[] cityArr = xlReader.ReadExcelCity(path);
 
             //xlReader.PrintMatrix(distanceArr);
-            City city = new City(cityArr, distanceArr);
+            City city = new City(cityArr, distanceArr,distanceMtrx);
             int select = 0;
             while (select != -1)
             {

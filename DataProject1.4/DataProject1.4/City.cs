@@ -10,17 +10,15 @@ namespace DataProject1._4
 {
     internal class City
     {
-        //private string cityName;
-        //private int distance;
         private string[] cityArr;
         private int[][] distanceArr;
+        private int[,] distanceMtrx;
 
-        public City(string[] cityArr, int[][] distanceArr)
+        public City(string[] cityArr, int[][] distanceArr, int[,] distanceMtrx)
         {
-            //this.cityName = cityName;
-            //this.distance = distance;
             this.cityArr = cityArr;
             this.distanceArr = distanceArr;
+            this.distanceMtrx = distanceMtrx;
         }
 
         public void CityByDistance(string cityName, int distance)
@@ -89,67 +87,44 @@ namespace DataProject1._4
 
         public void CityWander(string cityName, int distance)
         {
-            int[][] copiedDistanceArr = new int[distanceArr.Length][];
-            for (int i = 0; i < distanceArr.Length; i++)
-            {
-                copiedDistanceArr[i] = new int[distanceArr[i].Length];
-                Array.Copy(distanceArr[i], copiedDistanceArr[i], distanceArr[i].Length);
-            }
-            int row = NearestCityFinder(cityName, distance,copiedDistanceArr)[0];
-            int col = NearestCityFinder(cityName, distance, copiedDistanceArr)[1];
-            copiedDistanceArr[row][col] = 0;
-            cityName = cityArr[col];
-            distance = copiedDistanceArr[row][col];
+            Stack<int> cityStack = new Stack<int>();
+            List<int> visitedCityInd = new List<int>();
+            List<int> shortestPath = new List<int>();
+            bool[,] isVisited = new bool[81, 81]; // varsayılan false değeri atanmış
+            int totalDist = 0;
+            // İlk seçilen ili listeye ekler
+            int row = Array.IndexOf(cityArr, cityName); 
+            isVisited[row,row] = true;
+            cityStack.Push(row);  // ziyaret edilen şehirleri stacke ekler
+            visitedCityInd.Add(row);
 
+            int shortestWay = int.MaxValue;
+            int cityCounter = 0;
+            int nearCityInd = 0;
+            while (true)
+            {
+                nearCityInd =FindNearestCity(row);
+                cityStack.Push(nearCityInd);
+                visitedCityInd.Add(nearCityInd);
+
+            }
 
         }
 
-
-
-        // En yakın şehir olmaması durumunda result {0,0}
-        public int[] NearestCityFinder(string cityName, int distance, int[][]copiedDistanceArr)
+        public int FindNearestCity(int row)
         {
-            int row, col;
             int minDist = int.MaxValue;
-            Boolean isReverse = false;
+            int nearCityInd = 0;
 
-            for (row = 0; row < 81; row++)  // Seçilen ilin satırını row değişkenine atar
+            for (int col = 0; col < 81; col++) //En yakın şehri bulur
             {
-                if (cityArr[row].Equals(cityName)) { break; }
-            }
-
-            int[] result = new int[2];
-            for (col = 0; col < 81; col++)
-            {
-                if (col == row)
+                if (distanceMtrx[row, col] < minDist)
                 {
-                    isReverse = true;
-                    continue;
-                }
-                if (!isReverse)  // Kontrol mekanizmasının yönünü değiştirir
-                {
-                    if ((copiedDistanceArr[row][col] < minDist) && (copiedDistanceArr[row][col] <= distance))
-                    {
-                        result[0] = row;
-                        result[1] = col;
-                    }
-                }
-                else
-                {
-                    if ((distanceArr[col][row] < minDist) && (copiedDistanceArr[col][row] <= distance))
-                    {
-                        result[0] = col;
-                        result[1] = row;
-                    }
+                    minDist = distanceMtrx[row, col];
+                    nearCityInd = col;
                 }
             }
-            return result;
-        }
-
-        public void RandomFiveCity()
-        {
-            Random random = new Random();
-
+            return nearCityInd;
         }
     }
 }
