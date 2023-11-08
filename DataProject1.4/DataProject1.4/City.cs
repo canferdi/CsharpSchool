@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Schema;
 
 namespace DataProject1._4
 {
     internal class City
     {
+        int totalDist = 0;
+        List<int> visitedCities = new List<int>();
+      
+        Stack<int> shortestPath = new Stack<int>();
+        Stack<int> cityStack = new Stack<int>();
         private string[] cityArr;
         private int[][] distanceArr;
         private int[,] distanceMtrx;
@@ -73,7 +80,7 @@ namespace DataProject1._4
                         minCty1 = cityArr[col];
                         minCty2 = cityArr[row];
                     }
-                    else
+                    else if(tempDist > maxDist)
                     {
                         maxDist = tempDist;
                         maxCty1 = cityArr[col];
@@ -87,44 +94,73 @@ namespace DataProject1._4
 
         public void CityWander(string cityName, int distance)
         {
-            Stack<int> cityStack = new Stack<int>();
-            List<int> visitedCityInd = new List<int>();
-            List<int> shortestPath = new List<int>();
+            //Stack<int> cityStack = new Stack<int>();
+            
             bool[,] isVisited = new bool[81, 81]; // varsayılan false değeri atanmış
             int totalDist = 0;
             // İlk seçilen ili listeye ekler
             int row = Array.IndexOf(cityArr, cityName); 
             isVisited[row,row] = true;
-            cityStack.Push(row);  // ziyaret edilen şehirleri stacke ekler
-            visitedCityInd.Add(row);
+            //cityStack.Push(row);  // ziyaret edilen şehirleri stacke ekler
+            visitedCities.Add(row);
 
             int shortestWay = int.MaxValue;
             int cityCounter = 0;
             int nearCityInd = 0;
             while (true)
             {
-                nearCityInd =FindNearestCity(row);
-                cityStack.Push(nearCityInd);
-                visitedCityInd.Add(nearCityInd);
+                //nearCityInd =FindNearestCity(row, distance);
+                //cityStack.Push(nearCityInd);
+                visitedCities.Add(nearCityInd);
 
             }
-
         }
 
-        public int FindNearestCity(int row)
+        public int FindNearestCity(int row, int targetDist)
         {
+            
             int minDist = int.MaxValue;
             int nearCityInd = 0;
-
-            for (int col = 0; col < 81; col++) //En yakın şehri bulur
+            
+            cityStack.Push(row);
+            for (int col =0; col < 81; col++)
             {
-                if (distanceMtrx[row, col] < minDist)
+                if ((distanceMtrx[row,col]<minDist) &&(row!=col) && (!cityStack.Contains(col)))
                 {
-                    minDist = distanceMtrx[row, col];
+                    minDist = distanceMtrx[row,col];
                     nearCityInd = col;
                 }
             }
-            return nearCityInd;
+            totalDist += distanceMtrx[row, nearCityInd];
+            Console.WriteLine(totalDist);
+            if(totalDist > targetDist)
+            {
+                cityStack.Pop();
+                if(cityStack.Count > shortestPath.Count) 
+                {
+                    Console.WriteLine("en kısa yol");
+                }
+                Console.WriteLine("bitti");
+                return 0;
+            }
+            return FindNearestCity(nearCityInd, targetDist);
+
+
+        }
+        public void PrintCityStack()
+        {
+            foreach (int city in cityStack)
+            {
+                Console.WriteLine(cityArr[city]);
+            }
+        }
+        
+        public void PrintShortestPath()
+        {
+            foreach (int city in shortestPath)
+            {
+                Console.WriteLine(cityArr[city]);
+            }
         }
     }
 }

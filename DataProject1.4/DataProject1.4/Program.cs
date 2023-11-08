@@ -17,7 +17,6 @@ namespace DataProject1._4
             distanceArr = xlReader.ReadExcelDistance(path,distanceArr);
             distanceMtrx = xlReader.ReadExcelDistance(path, distanceMtrx);
             string[] cityArr = xlReader.ReadExcelCity(path);
-
             //xlReader.PrintMatrix(distanceArr);
             City city = new City(cityArr, distanceArr,distanceMtrx);
             int select = 0;
@@ -47,7 +46,9 @@ namespace DataProject1._4
                         city.MinMaxDistance();
                         break;
                     case 3:
-                        
+                        city.FindNearestCity(34, 500);
+                        city.PrintCityStack();
+                        city.PrintShortestPath();
                         break;
 
                     default:

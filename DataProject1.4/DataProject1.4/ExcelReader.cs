@@ -46,7 +46,7 @@ namespace DataProject1._4
                 // Excel tablosundan veri oku ve arraye yerleştir
                 for (int row = 0; row < 81; row++)
                 {
-                    for (int col = 0; col <= row; col++)
+                    for (int col = 0; col < 81; col++)
                     {
                         if (int.TryParse(worksheet.Cells[row + 3, col + 3].Value?.ToString(), out int value))
                         {
