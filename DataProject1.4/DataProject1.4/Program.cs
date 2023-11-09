@@ -48,7 +48,10 @@ namespace DataProject1._4
                     case 3:
                         city.FindNearestCity(34, 500);
                         city.PrintCityStack();
+                        Console.WriteLine("-------------------");
                         city.PrintShortestPath();
+                        Console.WriteLine("GEZİLEN ŞEHİRLER:");
+                        city.PrintVisitedCities();
                         break;
 
                     default:
