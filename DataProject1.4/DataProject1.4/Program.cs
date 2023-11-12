@@ -17,7 +17,6 @@ namespace DataProject1._4
             distanceArr = xlReader.ReadExcelDistance(path,distanceArr);
             distanceMtrx = xlReader.ReadExcelDistance(path, distanceMtrx);
             string[] cityArr = xlReader.ReadExcelCity(path);
-            //xlReader.PrintMatrix(distanceArr);
             City city = new City(cityArr, distanceArr,distanceMtrx);
             int select = 0;
             while (select != -1)
@@ -46,12 +45,24 @@ namespace DataProject1._4
                         city.MinMaxDistance();
                         break;
                     case 3:
-                        city.FindNearestCity(34, 500);
-                        city.PrintCityStack();
-                        Console.WriteLine("-------------------");
-                        city.PrintShortestPath();
-                        Console.WriteLine("GEZİLEN ŞEHİRLER:");
-                        city.PrintVisitedCities();
+                        Console.Write("Şehir indexi : ");
+                        int startingCityIndex = Int16.Parse(Console.ReadLine());
+                        Console.Write("Max mesafe : ");
+                        int maxDistance = Int16.Parse(Console.ReadLine());
+
+                        List<int> shortPath = new List<int>();
+                        List<int> maxCitiesPath = new List<int>();
+
+                        int maxCities = city.FindMaxCities(startingCityIndex, maxDistance, shortPath, maxCitiesPath);
+
+                        Console.WriteLine($"Başlangıç şehri {cityArr[startingCityIndex]} için maksimum {maxDistance} km mesafede gidilebilecek en fazla şehir sayısı: {maxCities}");
+                        Console.WriteLine("En çok gidilen path:");
+                        foreach (var cityIndex in maxCitiesPath)
+                        {
+                            Console.Write(cityArr[cityIndex] + " -> ");
+                        }
+                        Console.WriteLine();
+                        
                         break;
 
                     default:

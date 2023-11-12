@@ -96,6 +96,18 @@ namespace DataProject1._4
             }
         }
 
+        public void PrintMatrix(int[,] distanceArr)
+        {
+            for (int i = 0; i < distanceArr.GetLength(0); i++)
+            {
+                for (int j = 0; j < distanceArr.GetLength(1); j++)
+                {
+                    Console.Write(distanceArr[i,j] + "  ");
+                }
+                Console.WriteLine();
+            }
+        }
+
         public void PrintMatrix(string[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
