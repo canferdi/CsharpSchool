@@ -2,7 +2,7 @@
 using System.IO;
 using OfficeOpenXml;
 
-namespace DataProject1._4
+namespace DataProject
 {
     internal class ExcelReader
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProject1.4", "DataProject1.4\DataProject1.4.csproj", "{2EFB5EBF-A97B-4044-ADEA-F99A14E3CBEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProject", "DataProject1.4\DataProject.csproj", "{2EFB5EBF-A97B-4044-ADEA-F99A14E3CBEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

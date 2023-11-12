@@ -1,0 +1,15 @@
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\DataProject1.4.exe.config
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\DataProject1.4.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\DataProject1.4.pdb
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\EPPlus.dll
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\EPPlus.xml
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\obj\Debug\DataProject.csproj.AssemblyReference.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\obj\Debug\DataProject.csproj.CoreCompileInputs.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\obj\Debug\DataProject.csproj.CopyComplete
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\obj\Debug\DataProject1.4.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\obj\Debug\DataProject1.4.pdb

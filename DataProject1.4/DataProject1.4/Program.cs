@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataProject1._4
+namespace DataProject
 {
     internal class Program
     {
@@ -13,7 +13,7 @@ namespace DataProject1._4
             ExcelReader xlReader = new ExcelReader();
             int[][] distanceArr = new int[81][];
             int[,] distanceMtrx = new int[81, 81];
-            string path = @"C:\Users\fcan5\OneDrive\Belgeler\DataLab\ilmesafe.xlsx";
+            string path = @"C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject1.4\DataProject1.4\ilmesafe.xlsx";
             distanceArr = xlReader.ReadExcelDistance(path, distanceArr);
             distanceMtrx = xlReader.ReadExcelDistance(path, distanceMtrx);
             string[] cityArr = xlReader.ReadExcelCity(path);
@@ -21,15 +21,15 @@ namespace DataProject1._4
             short select = 0;
             while (select != -1)
             {
-                Console.WriteLine("-------------------------------------------------------------------------------------------------"+
+                Console.WriteLine("-------------------------------------------------------------------------------------------------" +
                                   "\n1- Verilen ilden belli bir uzaklığa kadar olan illerin ve uzaklıklarının listelenmesi." +
                                   "\n2- Türkiye’deki birbirine en yakın iki ilin ve en uzak iki ilin bulunması." +
                                   "\n3- Verilen ilden verilen mesafe kullanılarak en fazla kaç il dolaşılabildiğinin bulunması." +
                                   "\n4- Rastgele 5 şehir seçerek bu şehirleri matris şeklinde döndürür." +
-                                  "\nÇıkış için -1'e basınız."+
+                                  "\nÇıkış için -1'e basınız." +
                                   "\n-------------------------------------------------------------------------------------------------");
                 Console.Write("Seçiminiz : ");
-                if(!Int16.TryParse(Console.ReadLine(),out select)) // Sayı dışında veri girişi durumunda kontrol
+                if (!Int16.TryParse(Console.ReadLine(), out select)) // Sayı dışında veri girişi durumunda kontrol
                 {
                     select = 0;
                 }
@@ -89,7 +89,6 @@ namespace DataProject1._4
                     case 4:
                         city.RandomCityDistance();
                         break;
-                    // TODO: Random şehir bulma kısmı eklenecek
                     default:
                         // Menüdeki seçenekler dışında bir şey seçilirse.
                         Console.WriteLine("Hatalı seçim yaptınız! Lütfen tekrar deneyiniz.");
