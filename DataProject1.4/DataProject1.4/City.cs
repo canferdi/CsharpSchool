@@ -115,6 +115,36 @@ namespace DataProject1._4
             return maxCities;
         }
 
+        public void RandomCityDistance()
+        {
+            int[,] randomcitymatrix = new int[5, 5];
+            int[] randomplatenumbers = new int[5];
+            Random r = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                int randomplate = r.Next(0, 81);
+                randomplatenumbers[i] = randomplate;
+            }
+            Console.Write("".PadRight(15));
+            foreach (int i in randomplatenumbers)
+            {
+                Console.Write(cityArr[i].ToString().PadRight(15));
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(cityArr[randomplatenumbers[i]].PadRight(15));
+                for (int j = 0; j < 5; j++)
+                {
+                    randomcitymatrix[i, j] = distanceMtrx[randomplatenumbers[i], randomplatenumbers[j]];
+                    Console.Write(randomcitymatrix[i, j].ToString().PadRight(15));
+                }
+                Console.WriteLine();
+            }
+
+        }
+
     }
 }
 

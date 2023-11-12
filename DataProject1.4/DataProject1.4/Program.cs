@@ -87,6 +87,8 @@ namespace DataProject1._4
                         Console.WriteLine($"Gidilen toplam yol: {totalDist}km");
                         break;
                     case 4:
+                        city.RandomCityDistance();
+                        break;
                     // TODO: Random şehir bulma kısmı eklenecek
                     default:
                         // Menüdeki seçenekler dışında bir şey seçilirse.
