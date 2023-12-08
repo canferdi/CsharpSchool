@@ -64,6 +64,8 @@ namespace DataProject2
         List<String> cityNames = new List<String>();
         int declarationYear;
         List<UM_Alani>[] umAreaArray = new List<UM_Alani>[7];
+        StackUM[] umAreaArrayStack = new StackUM[7];
+        QueueUM[] umAreaArrayQueue = new QueueUM[7];
 
         public void UmCatch()
         {
@@ -97,33 +99,35 @@ namespace DataProject2
                                     heritageName = newText;
                                 }
                             }
-                            //Şehri alma
-                            foreach (string city in cities)
+                        }
+                        //Şehri alma
+                        foreach (string city in cities)
+                        {
+                            if (line.Contains(city))
                             {
-                                if (line.Contains(city))
-                                {
-                                    cityNames.Add(city);
-                                }
-                            }
-                            //Tarihi alma
-                            string[] words = line.Split(' ');
-                            foreach (string word in words)
-                            {
-                                if (int.TryParse(word, out declarationYear))
-                                {
-                                    break; // Eğer bir sayı bulunursa döngüden çık
-                                }
-                            }
-
-                            int regionInd;
-                            foreach (string city in cityNames)
-                            {
-                                regionInd = cityRegionMap[city];
-                                string[] cityArr = cityNames.ToArray();
-                                umAreaArray[regionInd].Add(new UM_Alani(heritageName, cityArr, declarationYear));
-
+                                cityNames.Add(city);
                             }
                         }
+                        //Tarihi alma
+                        string[] words = line.Split(' ');
+                        foreach (string word in words)
+                        {
+                            if (int.TryParse(word, out declarationYear))
+                            {
+                                break; // Eğer bir sayı bulunursa döngüden çık
+                            }
+                        }
+
+                        int regionInd;
+                        foreach (string city in cityNames)
+                        {
+                            regionInd = cityRegionMap[city];
+                            string[] cityArr = cityNames.ToArray();
+
+
+                            umAreaArray[regionInd].Add(new UM_Alani(heritageName, cityArr, declarationYear));
+                        }
+
                         cityNames.Clear();
                     }
                 }
