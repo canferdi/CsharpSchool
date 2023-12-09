@@ -1,0 +1,7 @@
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\bin\Debug\DataProject2.4.exe.config
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\bin\Debug\DataProject2.4.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\bin\Debug\DataProject2.4.pdb
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\obj\Debug\DataProject2.4.csproj.AssemblyReference.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\obj\Debug\DataProject2.4.csproj.CoreCompileInputs.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\obj\Debug\DataProject2.4.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2.4\DataProject2.4\obj\Debug\DataProject2.4.pdb
