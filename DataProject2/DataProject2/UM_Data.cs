@@ -65,9 +65,9 @@ namespace DataProject2
         List<String> cityNames = new List<String>();
         int declarationYear;
         List<UM_Alani>[] umAreaArray = new List<UM_Alani>[7];
-        StackUM[] umAreaArrayStack = new StackUM[7];
-        QueueUM[] umAreaArrayQueue = new QueueUM[7];
-        PriorityQueue[] umAreaArrayPqueue = new PriorityQueue[7];
+        StackUM umStack = new StackUM(100);
+        QueueUM umQueue = new QueueUM(100);
+        PriorityQueue umPqueue = new PriorityQueue();
         //TODO:
         List<UM_Alani> umList = new List<UM_Alani>();
 
@@ -77,9 +77,6 @@ namespace DataProject2
             for (int i = 0; i < 7; i++)
             {
                 umAreaArray[i] = new List<UM_Alani>();
-                umAreaArrayStack[i] = new StackUM(20);
-                umAreaArrayQueue[i] = new QueueUM(20);
-                umAreaArrayPqueue[i] = new PriorityQueue();
             }
             try
             {
@@ -158,81 +155,50 @@ namespace DataProject2
                     umAreaArray[i][j].printInfo();
                 }
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                Console.WriteLine();
             }
         }
 
         public void addStack(List<UM_Alani> umList)
         {
-            int regionInd;
             foreach (UM_Alani umAlani in umList)
             {
-                string[] cityNames = umAlani.getCityNames();
-                foreach (string cityName in cityNames)
-                {
-                    regionInd = cityRegionMap[cityName];
-                    umAreaArrayStack[regionInd].push(umAlani);
-                }
+                umStack.push(umAlani);
             }
 
-            for (int i = 0; i < 7; i++)
+            while (!umStack.isEmpty())
             {
-                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
-                while (!umAreaArrayStack[i].isEmpty())
-                {
-                    umAreaArrayStack[i].pop().printInfo();
-                }
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                umStack.pop().printInfo();
             }
+            Console.WriteLine();
         }
 
         public void addQueue(List<UM_Alani> umList)
         {
-            int regionInd;
             foreach (UM_Alani umAlani in umList)
             {
-                string[] cityNames = umAlani.getCityNames();
-                foreach (string cityName in cityNames)
-                {
-                    regionInd = cityRegionMap[cityName];
-                    umAreaArrayQueue[regionInd].enque(umAlani);
-                }
+                umQueue.enque(umAlani);
             }
 
-            for (int i = 0; i < 7; i++)
+            while (!umQueue.isEmpty())
             {
-                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
-                while (!umAreaArrayQueue[i].isEmpty())
-                {
-                    umAreaArrayQueue[i].deque().printInfo();
-                }
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                umQueue.deque().printInfo();
             }
+            Console.WriteLine();
         }
 
         public void addPqueue(List<UM_Alani> umList)
         {
-            int regionInd;
             foreach (UM_Alani umAlani in umList)
             {
-                string[] cityNames = umAlani.getCityNames();
-                foreach (string cityName in cityNames)
-                {
-                    regionInd = cityRegionMap[cityName];
-                    umAreaArrayPqueue[regionInd].enque(umAlani);
-                }
+                umPqueue.enque(umAlani);
             }
-
-            for (int i = 0; i < 7; i++)
+            while (!umPqueue.isEmpty())
             {
-                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
-                while (!umAreaArrayPqueue[i].isEmpty())
-                {
-                    umAreaArrayPqueue[i].deque().printInfo();
-                }
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                umPqueue.deque().printInfo();
             }
+            Console.WriteLine();
         }
-
 
     }
 }

@@ -23,14 +23,27 @@ namespace DataProject2
         {
             Console.Write(heritageName + ", ");
             Console.Write("[");
-            for (int i = 0; i < cityNames.Length-1; i++)
+            for (int i = 0; i < cityNames.Length - 1; i++)
             {
                 Console.Write(cityNames[i] + "-");
             }
-            Console.Write(cityNames[cityNames.Length-1]);
-            
+            Console.Write(cityNames[cityNames.Length - 1]);
+
             Console.Write("]");
             Console.WriteLine(", " + declarationYear);
+        }
+
+        public string getMinCity()
+        {
+            string minCity = cityNames[0];
+            foreach (string cityName in cityNames)
+            {
+                if (cityName.CompareTo(minCity) < 0)
+                {
+                    minCity = cityName;
+                }
+            }
+            return minCity;
         }
 
         public string[] getCityNames()

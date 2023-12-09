@@ -43,16 +43,8 @@ namespace DataProject2
             UM_Alani minItem = umAlanlari[0];
             foreach (UM_Alani umAlani in umAlanlari)
             {
-                foreach (string city in umAlani.getCityNames())
-                {
-                    string[] minCities = minItem.getCityNames();
-                    foreach (string minCity in minCities)
-                    {
-                        if (city.CompareTo(minCity) < 0)
-                        {
-                            minItem = umAlani;
-                        }
-                    }
+                if (minItem.getMinCity().CompareTo(umAlani.getMinCity()) > 0){
+                    minItem = umAlani;
                 }
             }
             return minItem;
