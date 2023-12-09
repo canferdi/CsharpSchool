@@ -64,11 +64,11 @@ namespace DataProject2
         string heritageName;
         List<String> cityNames = new List<String>();
         int declarationYear;
+
         List<UM_Alani>[] umAreaArray = new List<UM_Alani>[7];
         StackUM umStack = new StackUM(100);
         QueueUM umQueue = new QueueUM(100);
         PriorityQueue umPqueue = new PriorityQueue();
-        //TODO:
         List<UM_Alani> umList = new List<UM_Alani>();
 
         public List<UM_Alani> UmCatch()
@@ -149,11 +149,13 @@ namespace DataProject2
 
             for (int i = 0; i < 7; i++)
             {
+                int umCount = umAreaArray[i].Count();
                 Console.WriteLine(regions[i] + " BÖLGESİ:\n");
-                for (int j = 0; j < umAreaArray[i].Count(); j++)
+                for (int j = 0; j < umCount; j++)
                 {
                     umAreaArray[i][j].printInfo();
                 }
+                Console.WriteLine($"Toplam Unesco Miras Alanı sayısı: {umCount}");
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------");
             }
         }
@@ -168,8 +170,8 @@ namespace DataProject2
             while (!umStack.isEmpty())
             {
                 umStack.pop().printInfo();
-                Console.WriteLine();
             }
+            Console.WriteLine();
         }
 
         public void addQueue(List<UM_Alani> umList)
