@@ -73,7 +73,7 @@ namespace DataProject2
 
         public List<UM_Alani> UmCatch()
         {
-            string path = @"C:\Users\fcan5\Desktop\UM_Alanlari.txt";
+            string path = @"C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject2\DataProject2\UM_Alanlari.txt";
             for (int i = 0; i < 7; i++)
             {
                 umAreaArray[i] = new List<UM_Alani>();
@@ -155,7 +155,6 @@ namespace DataProject2
                     umAreaArray[i][j].printInfo();
                 }
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                Console.WriteLine();
             }
         }
 
@@ -169,8 +168,8 @@ namespace DataProject2
             while (!umStack.isEmpty())
             {
                 umStack.pop().printInfo();
+                Console.WriteLine();
             }
-            Console.WriteLine();
         }
 
         public void addQueue(List<UM_Alani> umList)
