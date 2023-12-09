@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace DataProject2
 {
     internal class StackUM
@@ -18,9 +20,14 @@ namespace DataProject2
         {
             stackArray[++top] = um;
         }
-
         public UM_Alani pop()
         {
+            if (isEmpty())
+            {
+                Console.WriteLine("Stack boş, pop işlemi yapılamaz.");
+                return null;
+            }
+
             return stackArray[top--];
         }
 
@@ -28,7 +35,6 @@ namespace DataProject2
         {
             return top == -1;
         }
-
 
     }
 }

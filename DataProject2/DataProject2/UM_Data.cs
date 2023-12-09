@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
@@ -13,9 +14,9 @@ namespace DataProject2
     internal class UM_Data
     {
         string[] cities = {
-            "Adana", "Adıyaman","Afyonkarahisar","Ağrı","Amasya","Ankara","Antalya","Artvin","Aydın","Balıkesir","Bilecik",
+            "Adana", "Adıyaman","Afyon","Ağrı","Amasya","Ankara","Antalya","Artvin","Aydın","Balıkesir","Bilecik",
             "Bingöl","Bitlis","Bolu","Burdur","Bursa","Çanakkale","Çankırı","Çorum","Denizli","Diyarbakır","Edirne","Elazığ",
-            "Erzincan","Erzurum","Eskişehir","Gaziantep","Giresun","Gümüşhane","Hakkâri","Hatay","Isparta","Mersin","İstanbul",
+            "Erzincan","Erzurum","Eskişehir","Gaziantep","Giresun","Gümüşhane","Hakkari","Hatay","Isparta","Mersin","İstanbul",
             "İzmir","Kars","Kastamonu","Kayseri","Kırklareli","Kırşehir","Kocaeli","Konya","Kütahya","Malatya","Manisa",
             "Kahramanmaraş","Mardin","Muğla","Muş","Nevşehir","Niğde","Ordu","Rize","Sakarya","Samsun","Siirt","Sinop",
             "Sivas","Tekirdağ","Tokat","Trabzon","Tunceli","Şanlıurfa","Uşak","Van","Yozgat","Zonguldak","Aksaray","Bayburt",
@@ -23,7 +24,7 @@ namespace DataProject2
             };
 
         Dictionary<string, int> cityRegionMap = new Dictionary<string, int>
-        {
+        { 
             // Akdeniz Bölgesi
             {"Antalya", 0},{"Burdur", 0},{"Isparta", 0},{"Mersin", 0},
             {"Adana", 0},{"Hatay", 0},{"Osmaniye", 0},{"Kahramanmaraş", 0},
@@ -58,7 +59,7 @@ namespace DataProject2
             {"Kocaeli", 6},{"Bilecik", 6},{"Sakarya", 6}
         };
 
-        string[] regions = { "Akdeniz", "Doğu Anadolu", "Ege", "Güneydoğu Anadolu", "İç Anadolu", "Karadeniz", "Marmara" };
+        string[] regions = { "AKDENİZ", "DOĞU ANADOLU", "EGE", "GÜNEYDOĞU ANADOLU", "İÇ ANADOLU", "KARADENİZ", "MARMARA" };
 
         string heritageName;
         List<String> cityNames = new List<String>();
@@ -66,13 +67,19 @@ namespace DataProject2
         List<UM_Alani>[] umAreaArray = new List<UM_Alani>[7];
         StackUM[] umAreaArrayStack = new StackUM[7];
         QueueUM[] umAreaArrayQueue = new QueueUM[7];
+        PriorityQueue[] umAreaArrayPqueue = new PriorityQueue[7];
+        //TODO:
+        List<UM_Alani> umList = new List<UM_Alani>();
 
-        public void UmCatch()
+        public List<UM_Alani> UmCatch()
         {
             string path = @"C:\Users\fcan5\Desktop\UM_Alanlari.txt";
             for (int i = 0; i < 7; i++)
             {
                 umAreaArray[i] = new List<UM_Alani>();
+                umAreaArrayStack[i] = new StackUM(20);
+                umAreaArrayQueue[i] = new QueueUM(20);
+                umAreaArrayPqueue[i] = new PriorityQueue();
             }
             try
             {
@@ -99,36 +106,27 @@ namespace DataProject2
                                     heritageName = newText;
                                 }
                             }
-                        }
-                        //Şehri alma
-                        foreach (string city in cities)
-                        {
-                            if (line.Contains(city))
+                            //Şehri alma
+                            foreach (string city in cities)
                             {
-                                cityNames.Add(city);
+                                if (line.Contains(city))
+                                {
+                                    cityNames.Add(city);
+                                }
                             }
-                        }
-                        //Tarihi alma
-                        string[] words = line.Split(' ');
-                        foreach (string word in words)
-                        {
-                            if (int.TryParse(word, out declarationYear))
+                            //Tarihi alma
+                            string[] words = line.Split(' ');
+                            foreach (string word in words)
                             {
-                                break; // Eğer bir sayı bulunursa döngüden çık
+                                if (int.TryParse(word, out declarationYear))
+                                {
+                                    break; // Eğer bir sayı bulunursa döngüden çık
+                                }
                             }
-                        }
-
-                        int regionInd;
-                        foreach (string city in cityNames)
-                        {
-                            regionInd = cityRegionMap[city];
                             string[] cityArr = cityNames.ToArray();
-
-
-                            umAreaArray[regionInd].Add(new UM_Alani(heritageName, cityArr, declarationYear));
+                            umList.Add(new UM_Alani(heritageName, cityArr, declarationYear));
+                            cityNames.Clear();
                         }
-
-                        cityNames.Clear();
                     }
                 }
             }
@@ -136,19 +134,105 @@ namespace DataProject2
             {
                 Console.WriteLine("Hata: " + e.Message);
             }
+            return umList;
+        }
+
+        public void addList(List<UM_Alani> umList)
+        {
+            int regionInd;
+            foreach (UM_Alani umAlani in umList)
+            {
+                string[] cityNames = umAlani.getCityNames();
+                foreach (string cityName in cityNames)
+                {
+                    regionInd = cityRegionMap[cityName];
+                    umAreaArray[regionInd].Add(umAlani);
+                }
+            }
 
             for (int i = 0; i < 7; i++)
             {
-                Console.WriteLine(regions[i] + " Bölgesi:");
+                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
                 for (int j = 0; j < umAreaArray[i].Count(); j++)
                 {
-                    //Console.WriteLine("i: " + i + " - j: " + j);
                     umAreaArray[i][j].printInfo();
                 }
-                Console.WriteLine();
-
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
             }
         }
+
+        public void addStack(List<UM_Alani> umList)
+        {
+            int regionInd;
+            foreach (UM_Alani umAlani in umList)
+            {
+                string[] cityNames = umAlani.getCityNames();
+                foreach (string cityName in cityNames)
+                {
+                    regionInd = cityRegionMap[cityName];
+                    umAreaArrayStack[regionInd].push(umAlani);
+                }
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
+                while (!umAreaArrayStack[i].isEmpty())
+                {
+                    umAreaArrayStack[i].pop().printInfo();
+                }
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            }
+        }
+
+        public void addQueue(List<UM_Alani> umList)
+        {
+            int regionInd;
+            foreach (UM_Alani umAlani in umList)
+            {
+                string[] cityNames = umAlani.getCityNames();
+                foreach (string cityName in cityNames)
+                {
+                    regionInd = cityRegionMap[cityName];
+                    umAreaArrayQueue[regionInd].enque(umAlani);
+                }
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
+                while (!umAreaArrayQueue[i].isEmpty())
+                {
+                    umAreaArrayQueue[i].deque().printInfo();
+                }
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            }
+        }
+
+        public void addPqueue(List<UM_Alani> umList)
+        {
+            int regionInd;
+            foreach (UM_Alani umAlani in umList)
+            {
+                string[] cityNames = umAlani.getCityNames();
+                foreach (string cityName in cityNames)
+                {
+                    regionInd = cityRegionMap[cityName];
+                    umAreaArrayPqueue[regionInd].enque(umAlani);
+                }
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                Console.WriteLine(regions[i] + " BÖLGESİ:\n");
+                while (!umAreaArrayPqueue[i].isEmpty())
+                {
+                    umAreaArrayPqueue[i].deque().printInfo();
+                }
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            }
+        }
+
 
     }
 }

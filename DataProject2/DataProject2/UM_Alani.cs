@@ -5,28 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataProject2
-    {
+{
     internal class UM_Alani
-        {
+    {
         private string heritageName;
         private string[] cityNames;
         private int declarationYear;
 
         public UM_Alani(string heritageName, string[] cityNames, int declarationYear)
-            {
+        {
             this.heritageName = heritageName;
             this.cityNames = cityNames;
             this.declarationYear = declarationYear;
-            }
+        }
 
         public void printInfo()
         {
-            Console.Write(heritageName + ",\t");
-            foreach (string city in cityNames)
+            Console.Write(heritageName + ", ");
+            Console.Write("[");
+            for (int i = 0; i < cityNames.Length-1; i++)
             {
-                Console.Write(city+" ");
+                Console.Write(cityNames[i] + "-");
             }
-            Console.WriteLine(",\t"+declarationYear);
+            Console.Write(cityNames[cityNames.Length-1]);
+            
+            Console.Write("]");
+            Console.WriteLine(", " + declarationYear);
         }
+
+        public string[] getCityNames()
+        {
+            return cityNames;
         }
     }
+}
