@@ -1,0 +1,7 @@
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\bin\Debug\DataProject3.exe.config
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\bin\Debug\DataProject3.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\bin\Debug\DataProject3.pdb
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\obj\Debug\DataProject3.csproj.AssemblyReference.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\obj\Debug\DataProject3.csproj.CoreCompileInputs.cache
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\obj\Debug\DataProject3.exe
+C:\Users\fcan5\OneDrive\Belgeler\DataLab\DataProject3\DataProject3\obj\Debug\DataProject3.pdb
